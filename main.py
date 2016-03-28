@@ -11,7 +11,7 @@ grid = [] # This will be filled of arrays full of True (living cells) and False 
 
 # Camera setup
 base.disableMouse()
-base.camera.setPos(gridSize/2, gridSize/2, 35)
+base.camera.setPos(gridSize/2, gridSize/2, gridSize*2.5)
 base.camera.setP(270)
 
 class Cell:
