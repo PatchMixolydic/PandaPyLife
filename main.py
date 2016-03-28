@@ -4,6 +4,8 @@ from direct.gui.DirectGui import *
 from direct.task import Task
 import random
 
+loadPrcFileData('', 'window-title Conway\'s Game of Life')
+
 base = ShowBase()
 
 gridSize = 16 # Both dimensions of the grid. The grid will wrap.
