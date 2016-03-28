@@ -14,6 +14,8 @@ runButton = None
 editButton = None
 editMode = False
 grid = []
+liveGrid = []
+newGridTemp = []
 
 class Cell:
     def __init__(self, alive):
@@ -64,19 +66,19 @@ def draw():
 
 def getCellAlive(cellX, cellY):
     try:
-        grid[cellX][cellY]
+        liveGrid[cellX][cellY]
     except:
         if cellX >= gridSize:
             cellX = 0
-        elif cellX <= 0:
+        elif cellX < 0:
             cellX = gridSize - 1
 
         if cellY >= gridSize:
             cellY = 0
-        elif cellY <= 0:
+        elif cellY < 0:
             cellY = gridSize - 1
 
-    return grid[cellX][cellY].alive
+    return liveGrid[cellX][cellY]
 
 def step():
     """
@@ -86,6 +88,16 @@ def step():
     Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
     -https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
     """
+    global liveGrid
+    liveGrid = []
+
+    for x in xrange(0, gridSize):
+        liveGrid.append([])
+
+    for x in grid:
+        for y in x:
+            liveGrid[grid.index(x)].append(y.alive)
+
     for x in grid:
         for y in x:
             neighbors = [getCellAlive(grid.index(x)-1, x.index(y)), getCellAlive(grid.index(x)-1, x.index(y)-1), getCellAlive(grid.index(x)-1, x.index(y)+1), getCellAlive(grid.index(x)+1, x.index(y)),
@@ -93,8 +105,6 @@ def step():
             if y.alive:
                 if neighbors.count(True) < 2 or neighbors.count(True) > 3:
                     y.alive = False
-                else:
-                    y.alive = True
             elif neighbors.count(True) == 3:
                 y.alive = True
     draw()
@@ -116,6 +126,8 @@ def runLoop(task):
 
 def toggleEdit():
     global editMode
+    if loopRunning:
+        toggleRun()
     if editMode:
         editMode = False
         editButton["text"] = ("Edit", "Edit", "Edit", "Edit")
