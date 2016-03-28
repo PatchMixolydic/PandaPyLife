@@ -1,2 +1,2 @@
 # Conway's Game of Life
-ANOTHER Game of Life implementation (this time in Panda3D).
+Yet another Game of Life. Requires Panda3D.
