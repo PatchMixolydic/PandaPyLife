@@ -17,7 +17,6 @@ editButton = None
 editMode = False
 grid = []
 liveGrid = []
-newGridTemp = []
 
 class Cell:
     def __init__(self, alive):
