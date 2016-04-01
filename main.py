@@ -27,14 +27,14 @@ class Cell:
 
     def draw(self):
         if self.alive:
-            self.model.show()
+            self.model.unstash()
             self.model.setColorScale(1,1,1,1)
         else:
             if editMode:
-                self.model.show()
+                self.model.unstash()
                 self.model.setColorScale(0.5,0.5,0.5,1)
             else:
-                self.model.hide()
+                self.model.stash()
 
 def initialize():
     global stepButton
