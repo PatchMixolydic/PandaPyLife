@@ -40,6 +40,7 @@ def initialize():
     global stepButton
     global runButton
     global editButton
+    global liveGrid
 
     # Camera setup
     base.disableMouse()
@@ -55,14 +56,15 @@ def initialize():
     for x in xrange(0, gridSize):
         row = []
         for y in xrange (0, gridSize):
-            row.append(Cell(random.choice([True, False])))
+            cell = Cell(random.choice([True, False]))
+            row.append(cell)
+            cell.model.setPos(x, y, 0)
         grid.append(row)
-        draw()
+    draw()
 
 def draw():
     for row in grid:
         for cell in row:
-            cell.model.setPos(grid.index(row), row.index(cell), 0)
             cell.draw()
 
 def getCellAlive(cellX, cellY):
